@@ -16,6 +16,12 @@ app = Flask(__name__)
 
 model = load_model('heart_disease_model.h5')
 
+
+@app.route('/')
+def index():
+    return 'Welcome to HealthAI-Predict API!'
+
+
 def preprocess_heart_input(input_data):
     # Convert input data to DataFrame
     df = pd.DataFrame([input_data])
