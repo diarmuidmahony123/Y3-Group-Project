@@ -1,5 +1,5 @@
 Flask==2.2.5
 pandas==1.3.5
-Keras==2.15.0
+Keras==2.14.0
 scikit-learn==1.3.2
 gunicorn==21.2.0
