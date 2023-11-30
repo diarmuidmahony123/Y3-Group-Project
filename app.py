@@ -9,10 +9,13 @@ from flask import Flask, request, jsonify
 import pandas as pd 
 from keras.models import load_model
 from sklearn.preprocessing import StandardScaler
+from flask_cors import CORS  # Import CORS
+
 #from lung_cancer_prediction import predict_lung_cancer
 #from diabetes_prediction import predict_diabetes
 
 app = Flask(__name__)
+CORS(app)
 
 model = load_model('heart_disease_model.h5')
 
