@@ -6,6 +6,7 @@ charset-normalizer==3.3.2
 click==8.1.7
 colorama==0.4.6
 Flask==3.0.0
+flask_cors==3.0.10
 flatbuffers==23.5.26
 gast==0.5.4
 google-auth==2.23.4
