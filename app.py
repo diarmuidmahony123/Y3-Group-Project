@@ -104,6 +104,7 @@ def preprocess_lung_input_data(data):
     # Scaling numerical features
    # scaler = StandardScaler()
     input_df[['AGE']] = lung_cancer_scaler.fit_transform(input_df[['AGE']])
+    input_df = input_df.astype(float)
     return input_df.values
 
 @app.route('/predict/lung_cancer', methods=['POST'])
