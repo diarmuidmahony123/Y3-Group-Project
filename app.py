@@ -41,7 +41,7 @@ def preprocess_heart_input(input_data):
     #scaler = StandardScaler()
     columns_to_scale = ['age', 'cp', 'trestbps', 'chol', 'restecg', 'thalach', 'oldpeak', 'slope', 'ca', 'thal']
     df[columns_to_scale] = heart_scaler.fit_transform(df[columns_to_scale])
-
+    df = df.astype(float)
     return df
 
 @app.route('/predict/heart_disease', methods=['POST'])
@@ -81,7 +81,7 @@ def preprocess_diabetes_input(input_data):
     numerical_features = ['age', 'bmi', 'HbA1c_level', 'blood_glucose_level']
     #scaler = StandardScaler()
     df[numerical_features] = diabetes_scaler.fit_transform(df[numerical_features])
-
+    df = df.astype(float)
     return df
 
 @app.route('/predict/diabetes', methods=['POST'])
