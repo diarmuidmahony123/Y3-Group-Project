@@ -9,7 +9,8 @@ from flask import Flask, request, jsonify
 import pandas as pd 
 from keras.models import load_model
 from sklearn.preprocessing import StandardScaler
-from flask_cors import CORS  # Import CORS
+from flask_cors import CORS 
+import joblib 
 
 #from lung_cancer_prediction import predict_lung_cancer
 #from diabetes_prediction import predict_diabetes
@@ -18,6 +19,12 @@ app = Flask(__name__)
 CORS(app)
 
 model = load_model('heart_disease_model.h5')
+diabetes_model = load_model('diabetes_model.h5')
+lung_cancer_model = load_model('lung_cancer_model.h5')
+
+heart_scaler = joblib.load('hdscaler.pkl')
+diabetes_scaler = joblib.load('scaler.pkl')
+lung_cancer_scaler = joblib.load('lcscaler.pkl')
 
 
 @app.route('/')
@@ -31,9 +38,9 @@ def preprocess_heart_input(input_data):
 
     # Apply the same preprocessing as used during training
     # Example: scaling numerical features
-    scaler = StandardScaler()
+    #scaler = StandardScaler()
     columns_to_scale = ['age', 'cp', 'trestbps', 'chol', 'restecg', 'thalach', 'oldpeak', 'slope', 'ca', 'thal']
-    df[columns_to_scale] = scaler.fit_transform(df[columns_to_scale])
+    df[columns_to_scale] = heart_scaler.fit_transform(df[columns_to_scale])
 
     return df
 
@@ -48,7 +55,7 @@ def heart_disease_prediction():
     return jsonify({'predicted_risk': predicted_risk, 'risk_level': risk})  # Now it should work
 
 
-diabetes_model = load_model('diabetes_model.h5')
+
 
 def preprocess_diabetes_input(input_data):
     # Assume input_data is a dictionary with the same structure as your training data
@@ -72,8 +79,8 @@ def preprocess_diabetes_input(input_data):
 
     # Scale numerical features
     numerical_features = ['age', 'bmi', 'HbA1c_level', 'blood_glucose_level']
-    scaler = StandardScaler()
-    df[numerical_features] = scaler.fit_transform(df[numerical_features])
+    #scaler = StandardScaler()
+    df[numerical_features] = diabetes_scaler.fit_transform(df[numerical_features])
 
     return df
 
@@ -87,7 +94,7 @@ def diabetes_prediction():
     risk = "high" if predicted_class else "low"
     return jsonify({'predicted_risk': predicted_risk, 'risk_level': risk})
 
-lung_cancer_model = load_model('lung_cancer_model.h5')
+
 
 def preprocess_lung_input_data(data):
     # Convert the data dictionary to a DataFrame
@@ -95,8 +102,8 @@ def preprocess_lung_input_data(data):
     # Encode categorical variables
     input_df['GENDER'] = input_df['GENDER'].map({'M': 1, 'F': 0})
     # Scaling numerical features
-    scaler = StandardScaler()
-    input_df[['AGE']] = scaler.fit_transform(input_df[['AGE']])
+   # scaler = StandardScaler()
+    input_df[['AGE']] = lung_cancer_scaler.fit_transform(input_df[['AGE']])
     return input_df.values
 
 @app.route('/predict/lung_cancer', methods=['POST'])
