@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up page</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-image: url(images/backgroud12.jpg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-size: 18px;
+            width: 500px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sign-up Form -->
+    <form>
+        <h2>Sign up form</h2>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" class="form-control" required>
+        </div>
+
+        
+
+        <button type="button" id="signup" class="btn btn-primary">Sign Up</button>
+    </form>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBcR46Vvrz7x-32jCcpHUQBl3o03W7lQio",
+            authDomain: "year3groupproject-27054.firebaseapp.com",
+            databaseURL: "https://year3groupproject-27054-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "year3groupproject-27054",
+            storageBucket: "year3groupproject-27054.appspot.com",
+            messagingSenderId: "628491120267",
+            appId: "1:628491120267:web:c85f021b55f1b055eeae8e",
+            measurementId: "G-36YZWBW5BQ"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const signupButton = document.getElementById('signup');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const isMedicalProfessionalCheckbox = document.getElementById('isMedicalProfessional');
+
+        signupButton.addEventListener('click', async () => {
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            const isMedicalProfessional = isMedicalProfessionalCheckbox.checked;
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Save user details to Firestore
+                await saveUserDetailsToFirestore(user.uid, { isMedicalProfessional });
+
+                alert('User created!');
+                window.location.href = "index.html";
+            } catch (error) {
+                const errorMessage = error.message;
+                alert(errorMessage);
+            }
+        });
+
+        async function saveUserDetailsToFirestore(uid, userDetails) {
+            try {
+                // Create a new collection with a unique UID for the user
+                const userDocRef = doc(db, "users", uid);
+
+                // Set user details in the new collection
+                await setDoc(userDocRef, userDetails);
+            } catch (error) {
+                console.error("Error saving user details to Firestore:", error.message);
+            }
+        }
+    </script>
+
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

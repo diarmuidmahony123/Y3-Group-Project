@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags and title -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health AI Website</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Styles -->
+    <style>
+        body {
+            background-image: url("images/2870382_15000.jpg");
+            background-size: 1600px;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: black;
+        }
+
+        nav {
+            display: flex;
+            flex-direction: column;
+            background-color: #333;
+            padding: 20px;
+            height: 100vh;
+            width: 200px;
+            position: fixed;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+            width: 20px;
+            height: 20px;
+        }
+
+        img {
+            width: 110px;
+            height: 110px;
+            margin-left: 5px;
+            margin-top: 1px;
+            border: 100px;
+            border-radius: 100%;
+            overflow: hidden;
+        }
+
+        .nav-link a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .nav-link a:hover {
+            color: #04AA6D;
+        }
+
+        .container {
+            margin-left: 220px;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: black;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            font-weight: bold;
+            color: black;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: black;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: black;
+            font-weight: bold;
+        }
+
+        ul.features li {
+            font-weight: bold;
+            color: black;
+        }
+
+        #contact-info {
+            background-color: rgba(97, 97, 195, 0.603);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            text-align: left;
+            margin-top: 50px;
+        }
+
+        #contact-info h3 {
+            margin-bottom: 20px;
+        }
+
+        #data-section {
+            margin-top: 20px;
+            margin-left: 220px;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        .database-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 25%;
+        }
+
+        ol {
+            color: black;
+            font-weight: bold ;
+        }
+
+        /* Add the following styles for the skip to content link */
+       #screen-reader-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        #screen-reader-btn:hover {
+            background-color: #0056b3; /* Change the hover color as needed */
+        }
+     
+    </style>
+</head>
+<body>
+    <button id="screen-reader-btn" onclick="toggleScreenReader()">
+        <span id="screen-reader-icon" role="img" aria-label="Headphone Icon">🎧</span> start reader
+    </button>
+   
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <img src="images/Health AI.png">
+        </div>
+        <div class="nav-links">
+            <br><br><br>
+            <div class="nav-link"><a class="active" href="Home.html">Home</a></div>
+            <div class="nav-link"><a href="HealthAiPrediction.html">HealthAiPrediction</a></div>
+            <div class="nav-link"><a href="contact.html">Contact</a></div>
+            <div class="nav-link"><a href="index.html">Logout</a></div>
+            <div class="nav-link"><a href="MedProfessiosForm.html">Professionals Form</a></div>
+            <div class="nav-link"><a href="HearthDiseasePredict.html">Heath Disease Predict</a></div>
+            <div class="nav-link"><a href="LungCancer.html">Lung_Cancer</a></div>
+        </div>
+    </nav>
+
+    <div class="container">
+    
+
+        
+        <h1>Welcome to the Health AI Website</h1>
+
+        <h2><b>Empowering Your Health with Artificial Intelligence</b></h2>
+
+        <p><b>
+            Explore the future of healthcare with Health AI, where cutting-edge artificial intelligence meets personalized wellness. Our platform is designed to provide you with valuable insights into your health and connect you with professionals who care.
+        </p></b>
+
+        <h3 id="key-features-heading" tabindex="0" aria-label="Key Features"><b>Key Features</b></h3>
+        <ul class="features" role="list" aria-labelledby="key-features-heading">
+            <li role="listitem">Personalized Health Predictions</li>
+            <li role="listitem">Professional Guidance</li>
+            <li role="listitem">Secure and Confidential</li>
+            <li role="listitem">User-Friendly Interface</li>
+        </ul>
+
+        <h3 id="how-it-works-heading" tabindex="0" aria-label="How It Works">How It Works</h3>
+<ol role="list" aria-labelledby="how-it-works-heading">
+    <li role="listitem">Sign Up</li>
+    <li role="listitem">Upload Medical History</li>
+    <li role="listitem">AI Analysis</li>
+    <li role="listitem">Connect with Professionals</li>
+</ol>
+        <p>
+            Ready to take control of your health? Sign up today and embark on a journey towards a healthier and happier you.
+        </p>
+
+        <!-- Contact Information -->
+        <div id="contact-info">
+            <h3>Contact Information</h3>
+            <p>Email: <a href="mailto:healthai344@gmail.com">healthai344@gmail.com</a></p>
+            <p>Phone: <a href="tel:+1234567890">+123 456 7890</a></p>
+        </div>
+    </div>
+
+   
+
+
+  
+
+    <!-- Firebase JavaScript SDK -->
+    <script>
+        function addeItemToTable(age,contactNumber,insuranceProvider,name){
+            let trow = document.createElement("trow");
+            let td1 = document.createElement("td");
+            let td2 = document.createElement("td");
+            let td3 = document.createElement("td");
+            let td4 = document.createElement("td");
+            let td5 = document.createElement("td");
+
+            t
+        }
+     
+        // Initialize Firebase (replace with your own config)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBcR46Vvrz7x-32jCcpHUQBl3o03W7lQio",
+            authDomain: "year3groupproject-27054.firebaseapp.com",
+            databaseURL: "https://year3groupproject-27054-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "year3groupproject-27054",
+            storageBucket: "year3groupproject-27054.appspot.com",
+            messagingSenderId: "628491120267",
+            appId: "1:628491120267:web:c85f021b55f1b055eeae8e",
+            measurementId: "G-36YZWBW5BQ"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        // Firestore reference
+        const db = firebase.firestore();
+        const dataCollection = db.collection("Mobile Patient details"); // Replace with your actual collection name
+
+        // Function to fetch and display data
+        function fetchData() {
+    const dataTableBody = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+
+    // Clear existing rows
+    while (dataTableBody.firstChild) {
+        dataTableBody.removeChild(dataTableBody.firstChild);
+    }
+
+    // Insert new rows with data from Firestore
+    dataCollection.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const row = dataTableBody.insertRow();
+
+            // Loop through all columns in the document
+            for (const key in data) {
+                if (data.hasOwnProperty(key)) {
+                    const cell = row.insertCell();
+                    cell.textContent = data[key];
+                }
+            }
+        });
+    });
+}
+       
+        // Fetch and display data on page load
+        fetchData();
+
+
+
+ 
+
+
+        function toggleScreenReader() {
+    const screenReaderBtn = document.getElementById('screen-reader-btn');
+    const isScreenReaderActive = screenReaderBtn.getAttribute('aria-pressed') === 'true';
+
+    if (isScreenReaderActive) {
+        // Deactivate screen reader
+        screenReaderBtn.setAttribute('aria-pressed', 'false');
+        screenReaderBtn.textContent = '🎧 start reader';
+        stopReading();
+    } else {
+        // Activate screen reader
+        screenReaderBtn.setAttribute('aria-pressed', 'true');
+        screenReaderBtn.textContent = '🔇 stop reader';
+        readPageContent();
+    }
+}
+
+// Function to read the content of the page
+function readPageContent() {
+    const pageContent = document.body.innerText;
+    const sentences = pageContent.split(/[.!?]/); // Split content into sentences
+
+    let currentIndex = 0;
+
+    function speakNextSentence() {
+        if (currentIndex < sentences.length) {
+            const sentence = sentences[currentIndex].trim();
+            if (sentence !== "") {
+                const utterance = new SpeechSynthesisUtterance(sentence);
+                utterance.onend = () => {
+                    currentIndex++;
+                    // Continue with the next sentence after a short delay
+                    setTimeout(speakNextSentence, 500);
+                };
+                window.speechSynthesis.speak(utterance);
+            } else {
+                currentIndex++;
+                // Continue with the next sentence after a short delay
+                setTimeout(speakNextSentence, 500);
+            }
+        }
+    }
+
+    // Start reading the page
+    speakNextSentence();
+}
+
+// Function to stop speech synthesis
+function stopReading() {
+    window.speechSynthesis.cancel();
+}
+       
+</script>
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
