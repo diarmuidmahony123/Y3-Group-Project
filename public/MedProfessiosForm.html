@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags and existing styles... -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Professional Data</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Your Styles -->
+    <style>
+        body {
+            background-image: url("images/2870382_15000.jpg");
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: rgba(0, 0, 101, 0.955);
+        }
+
+        nav {
+            display: flex;
+            flex-direction: column;
+            background-color: #333;
+            padding: 20px;
+            height: 100vh;
+            width: 200px;
+            position: fixed;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+            width: 20px;
+            height: 20px;
+        }
+
+        img {
+            width: 110px;
+            height: 110px;
+            margin-left: 5px;
+            margin-top: 1px;
+            border: 100px;
+            border-radius: 100%;
+            overflow: hidden;
+        }
+
+        .nav-link a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .nav-link a:hover {
+            color: #04AA6D;
+        }
+
+        .container {
+            margin-left: 220px;
+            padding: 20px;
+        }
+
+        /* Add Bootstrap styles to your form */
+        #medical-professional-form {
+            max-width: 400px;
+            margin: auto;
+        }
+        #screen-reader-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        #screen-reader-btn:hover {
+            background-color: #0056b3; /* Change the hover color as needed */
+        }
+
+        /* Your other styles... */
+    </style>
+</head>
+<body>
+    <button id="screen-reader-btn" onclick="toggleScreenReader()">
+        <span id="screen-reader-icon" role="img" aria-label="Headphone Icon">🎧</span> start reader
+    </button>
+    <script>
+    function toggleScreenReader() {
+    const screenReaderBtn = document.getElementById('screen-reader-btn');
+    const isScreenReaderActive = screenReaderBtn.getAttribute('aria-pressed') === 'true';
+
+    if (isScreenReaderActive) {
+        // Deactivate screen reader
+        screenReaderBtn.setAttribute('aria-pressed', 'false');
+        screenReaderBtn.textContent = '🎧 start reader';
+        stopReading();
+    } else {
+        // Activate screen reader
+        screenReaderBtn.setAttribute('aria-pressed', 'true');
+        screenReaderBtn.textContent = '🔇 stop reader';
+        readPageContent();
+    }
+}
+
+// Function to read the content of the page
+function readPageContent() {
+    const pageContent = document.body.innerText;
+    const sentences = pageContent.split(/[.!?]/); // Split content into sentences
+
+    let currentIndex = 0;
+
+    function speakNextSentence() {
+        if (currentIndex < sentences.length) {
+            const sentence = sentences[currentIndex].trim();
+            if (sentence !== "") {
+                const utterance = new SpeechSynthesisUtterance(sentence);
+                utterance.onend = () => {
+                    currentIndex++;
+                    // Continue with the next sentence after a short delay
+                    setTimeout(speakNextSentence, 500);
+                };
+                window.speechSynthesis.speak(utterance);
+            } else {
+                currentIndex++;
+                // Continue with the next sentence after a short delay
+                setTimeout(speakNextSentence, 500);
+            }
+        }
+    }
+
+    // Start reading the page
+    speakNextSentence();
+}
+
+// Function to stop speech synthesis
+function stopReading() {
+    window.speechSynthesis.cancel();
+}
+       
+</script>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <img src="images/Health AI.png">
+        </div>
+        <div class="nav-links">
+            <br><br><br>
+            <div class="nav-link"><a class="active" href="Home.html">Home</a></div>
+            <div class="nav-link"><a href="HealthAiPrediction.html">HealthAiPrediction</a></div>
+            <div class="nav-link"><a href="contact.html">Contact</a></div>
+            <div class="nav-link"><a href="index.html">Logout</a></div>
+            <div class="nav-link"><a href="MedProfessiosForm.html">Professionals Form</a></div>
+            <div class="nav-link"><a href="HearthDiseasePredict.html">Heath Disease Predict</a></div>
+            <div class="nav-link"><a href="LungCancer.html">Lung cancer predict</a></div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container">
+        <form id="medical-professional-form" class="container">
+            <h2 class="text-center">Medical Professional Information</h2>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <button type="button" id="fetchDataButton" class="btn btn-primary btn-block">Fetch Data</button>
+            <div class="form-group">
+                <label for="documentId">Document ID:</label>
+                <input type="text" id="documentId" name="documentId" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+                <label for="doctor-name">Doctor Name:</label>
+                <input type="text" id="doctor-name" name="doctor-name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="sex">Sex:</label>
+                <input type="text" id="sex" name="sex" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="specialization">Specialization:</label>
+                <input type="text" id="specialization" name="specialization" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="experience">Experience (years):</label>
+                <input type="number" id="experience" name="experience" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="hospital">Hospital:</label>
+                <input type="text" id="hospital" name="hospital" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="number">Doctors Number:</label>
+                <input type="number" id="number" name="number" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            <button type="button" id="updateButton" class="btn btn-secondary btn-block">Update</button>
+        </form>
+        <p id="error-message"></p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+        import { getFirestore, collection, addDoc, doc, updateDoc, query, where, getDocs, getDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBcR46Vvrz7x-32jCcpHUQBl3o03W7lQio",
+            authDomain: "year3groupproject-27054.firebaseapp.com",
+            databaseURL: "https://year3groupproject-27054-c957b.firebaseio.com/",
+            projectId: "year3groupproject-27054",
+            storageBucket: "year3groupproject-27054.appspot.com",
+            messagingSenderId: "628491120267",
+            appId: "1:628491120267:web:c85f021b55f1b055eeae8e",
+            measurementId: "G-36YZWBW5BQ"
+        };
+
+        const firebaseApp = initializeApp(firebaseConfig);
+        const firestore = getFirestore(firebaseApp);
+
+        const form = document.getElementById("medical-professional-form");
+        const errorMessage = document.getElementById("error-message");
+        const fetchDataButton = document.getElementById("fetchDataButton");
+        const updateButton = document.getElementById("updateButton");
+
+        fetchDataButton.addEventListener("click", async function () {
+            const email = form.querySelector("#email").value;
+
+            if (email) {
+                try {
+                    // Fetch existing data based on email
+                    const emailQuery = query(collection(firestore, "MedicalProfessionals"), where("email", "==", email));
+                    const emailSnapshot = await getDocs(emailQuery);
+
+                    if (emailSnapshot.size > 0) {
+                        const data = emailSnapshot.docs[0].data();
+
+                        // Populate form fields with existing data
+                        form.querySelector("#documentId").value = emailSnapshot.docs[0].id;
+                        form.querySelector("#doctor-name").value = data.doctorName;
+                        form.querySelector("#sex").value = data.sex;
+                        form.querySelector("#specialization").value = data.specialization;
+                        form.querySelector("#experience").value = data.experience;
+                        form.querySelector("#hospital").value = data.hospital;
+                        form.querySelector("#number").value = data.number;
+                        
+                        // Display success message
+                        errorMessage.textContent = "Data fetched for update.";
+                    } else {
+                        // Display error if email not found
+                        errorMessage.textContent = "Error: Email not found.";
+                    }
+                } catch (error) {
+                    console.error("Error fetching data for update: ", error);
+                    errorMessage.textContent = `Error: ${error.message}`;
+                }
+            } else {
+                // Display error if email is not provided
+                errorMessage.textContent = "Error: Please enter an email.";
+            }
+        });
+
+        updateButton.addEventListener("click", async function () {
+            const documentIdField = form.querySelector("#documentId");
+            const documentId = documentIdField ? documentIdField.value : null;
+
+            if (documentId) {
+                try {
+                    // Your form data...
+                    const email = form.querySelector("#email").value;
+                    const doctorName = form.querySelector("#doctor-name").value;
+                    const sex = form.querySelector("#sex").value;
+                    const specialization = form.querySelector("#specialization").value;
+                    const experience = form.querySelector("#experience").value;
+                    const hospital = form.querySelector("#hospital").value;
+                    const number = form.querySelector("#number").value;
+                    // Add other form fields...
+
+                    // Update existing document
+                    await updateDoc(doc(firestore, "MedicalProfessionals", documentId), {
+                        email,
+                        doctorName,
+                        sex,
+                        specialization,
+                        experience,
+                        hospital,
+                        number,
+                    });
+
+                    // Display success message
+                    errorMessage.textContent = "Data updated successfully.";
+                } catch (error) {
+                    console.error("Error updating data: ", error);
+                    errorMessage.textContent = `Error: ${error.message}`;
+                }
+            } else {
+                // Display error if Document ID is not provided
+                errorMessage.textContent = "Error: Please fetch data and enter Document ID for update.";
+            }
+        });
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            // Your form data...
+            const email = form.querySelector("#email").value;
+            const doctorName = form.querySelector("#doctor-name").value;
+            const sex = form.querySelector("#sex").value;
+            const specialization = form.querySelector("#specialization").value;
+            const experience = form.querySelector("#experience").value;
+            const hospital = form.querySelector("#hospital").value;
+            const number = form.querySelector("#number").value;
+            // Add other form fields...
+
+            // Basic form validation...
+            
+            try {
+                // Check if the email already exists in the database
+                const emailQuery = query(collection(firestore, "MedicalProfessionals"), where("email", "==", email));
+                const emailSnapshot = await getDocs(emailQuery);
+
+                // Check if the doctor name already exists in the database
+                const nameQuery = query(collection(firestore, "MedicalProfessionals"), where("doctorName", "==", doctorName));
+                const nameSnapshot = await getDocs(nameQuery);
+
+                if (emailSnapshot.size > 0 || !nameSnapshot.empty) {
+                    // Display error message if email or doctor name already exists
+                    errorMessage.textContent = "Error: Email or Doctor name already exists in the database.";
+                    return;
+                }
+
+                // If email and doctor name don't exist, proceed to add the new document
+                await addDoc(collection(firestore, "MedicalProfessionals"), {
+                    email,
+                    doctorName,
+                    sex,
+                    specialization,
+                    experience,
+                    hospital,
+                    number,
+                });
+
+                // Clear error message if any
+                errorMessage.textContent = "";
+            } catch (error) {
+                console.error("Error adding/updating data: ", error);
+                // Display error message
+                errorMessage.textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>
